@@ -484,8 +484,45 @@ for(i in a){
 ## [1] 1.098612
 ## [1] 1.386294
 ## [1] 1.609438</code></pre>
-<p>MUITO LEGAL!!!</p>
-<p>VAMOS VER ALGUMAS ALGUMAS APLICAÇÕES PARA ANÁLISE DE DADOS!!!</p>
+</div>
+</div>
+<div id="funções" class="section level2">
+<h2><strong>Funções</strong></h2>
+<p>Em R, uma função é um bloco de código que realiza uma tarefa
+específica e pode ser reutilizado em diferentes partes do programa. Ela
+pode receber argumentos (valores de entrada) e retornar um resultado
+(valor de saída). Funções ajudam a tornar o código mais modular, legível
+e reutilizável.</p>
+<div id="sintaxe-1" class="section level3">
+<h3>Sintaxe</h3>
+<p>nome_da_funcao &lt;-
+<strong>function</strong>(<strong>argumento1</strong>,
+<strong>argumento2</strong>, …) {</p>
+<p># Corpo da função: código a ser executado</p>
+<p>resultado &lt;- expressao_a_ser_retornada</p>
+<p>return(resultado) # Opcional, mas utilizado para retornar um
+valor</p>
+<p>}</p>
+<pre class="r"><code># Definindo a função para calcular o IMC
+calcular_imc &lt;- function(peso, altura) {
+  # Calcula o IMC
+  imc &lt;- peso / (altura^2)
+  
+  # Retorna o resultado
+  return(imc)
+}
+
+# Exemplo de uso da função
+peso &lt;- 70  # peso em kg
+altura &lt;- 1.75  # altura em metros
+
+# Chamando a função e imprimindo o resultado
+imc_resultado &lt;- calcular_imc(peso, altura)
+print(imc_resultado)</code></pre>
+<pre><code>## [1] 22.85714</code></pre>
+<p><strong>MUITO LEGAL!!!</strong></p>
+<p><strong>VAMOS VER ALGUMAS ALGUMAS APLICAÇÕES PARA ANÁLISE DE
+DADOS!!!</strong></p>
 </div>
 </div>
 </div>

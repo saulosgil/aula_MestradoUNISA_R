@@ -132,6 +132,43 @@ for(i in a){
 }
 ```
 
-MUITO LEGAL!!!
+## **Funções**
 
-VAMOS VER ALGUMAS ALGUMAS APLICAÇÕES PARA ANÁLISE DE DADOS!!!
+Em R, uma função é um bloco de código que realiza uma tarefa específica e pode ser reutilizado em diferentes partes do programa. Ela pode receber argumentos (valores de entrada) e retornar um resultado (valor de saída). Funções ajudam a tornar o código mais modular, legível e reutilizável.
+
+### Sintaxe 
+
+
+nome_da_funcao <- **function**(**argumento1**, **argumento2**, ...) {
+
+  # Corpo da função: código a ser executado
+
+  resultado <- expressao_a_ser_retornada
+
+  return(resultado)  # Opcional, mas utilizado para retornar um valor
+
+}
+
+```{r}
+# Definindo a função para calcular o IMC
+calcular_imc <- function(peso, altura) {
+  # Calcula o IMC
+  imc <- peso / (altura^2)
+  
+  # Retorna o resultado
+  return(imc)
+}
+
+# Exemplo de uso da função
+peso <- 70  # peso em kg
+altura <- 1.75  # altura em metros
+
+# Chamando a função e imprimindo o resultado
+imc_resultado <- calcular_imc(peso, altura)
+print(imc_resultado)
+
+```
+
+**MUITO LEGAL!!!**
+
+**VAMOS VER ALGUMAS ALGUMAS APLICAÇÕES PARA ANÁLISE DE DADOS!!!**
