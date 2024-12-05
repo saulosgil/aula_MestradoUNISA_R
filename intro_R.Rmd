@@ -1,0 +1,137 @@
+---
+title: "Introdução ao R"
+author: "Saulo Gil"
+date: "2024-12-05"
+output: html_document
+---
+
+# Mestrado em Ciências - UNISA
+## Introdução ao R para análise de dados
+
+  O software R é uma linguagem de programação e ambiente de software livre, utilizado principalmente para **análise estatística e computação gráfica**. Ele foi desenvolvido inicialmente por Ross Ihaka e Robert Gentleman, na Universidade de Auckland, na Nova Zelândia, nos anos 1990, e desde então tornou-se uma das ferramentas mais populares entre estatísticos, cientistas de dados e analistas.
+
+```{r}
+print("PRAZER EU SOU O R")
+```
+
+**1. Características principais do R:**
+
+**Análise estatística avançada:** R oferece uma vasta gama de pacotes para análises estatísticas complexas, como modelos lineares e não lineares, análise de séries temporais, análise multivariada, teste de hipóteses, entre outros.
+
+**Visualização de dados:** O R permite criar gráficos altamente personalizados e interativos.
+
+**Extensibilidade:** Há milhares de pacotes adicionais que podem ser instalados para expandir as funcionalidades do R, permitindo que ele seja utilizado em diferentes áreas, como ciência de dados, finanças, saúde, etc.
+
+**Interface de programação:** O R possui uma linguagem de programação bastante poderosa, com suporte para programação orientada a objetos, funções, loops e manipulação de dados.
+
+**Comunidade ativa:** Por ser um software de código aberto, o R tem uma comunidade global muito ativa que contribui para seu desenvolvimento, criando pacotes e oferecendo suporte em fóruns.
+
+**Integração com outras ferramentas:** R pode ser integrado a outros softwares como Python, SQL, entre outros, e também pode ler e escrever dados em diversos formatos (CSV, Excel, bancos de dados, etc.).
+
+
+## **OPERAÇÕES MATEMÁTICAS BÁSICAS**
+
+**Adição**
+```{r }
+1 + 1
+```
+
+**Subtração**
+```{r }
+1 - 1
+```
+
+**Divisão**
+```{r }
+10 / 2
+```
+
+**Multiplicação**
+```{r }
+2 * 2
+```
+
+**Potenciação**
+```{r }
+2 ^ 2
+```
+
+## Programação Orientada ao objeto 
+
+  A programação orientada a objetos (POO) é um paradigma de programação que organiza o código em objetos. 
+
+  **É possível armazenar dados em objetos e realizar operações!!!**
+
+
+### Quantos anos eu tenho?
+```{r}
+nascimento = 1986
+ano_atual = 2024
+
+minha_idade = ano_atual - nascimento
+
+print(paste("Eu tenho", minha_idade, "anos."))
+```
+
+## Condicionais e loop 
+Em R, as condicionais permitem que você execute diferentes blocos de código com base em uma condição, ou seja, elas são usadas para testar se algo é verdadeiro ou falso e, com base nisso, realizar uma ação.
+
+```{r}
+10 >= 2
+```
+
+```{r}
+10 >= 20
+```
+
+1. Principais estruturas condicionais em R:
+ 
+ - if
+ 
+ - else
+ 
+ - else if
+ 
+### Sintaxe 
+if (condição){
+
+  O que será apresentado se a condição for VERDADEIRA
+  
+} else {
+
+  O que será apresentado se a condição for FALSA
+
+}
+
+**Exemplo**
+```{r }
+if (minha_idade < 38) {
+  print("Jovem =D")
+} else {
+  print("Muito Jovem")
+}
+```
+
+## **Loop**
+```{r }
+a = c(1,2,3,4,5)
+
+for(i in a){
+  print(paste("Estou imprimindo o valor:", i))
+}
+```
+
+### Exemplo
+
+```{r }
+a = c(1,2,3,4,5)
+
+for(i in a){
+  valor_log = log(i)
+  print(valor_log)
+}
+```
+
+MUITO LEGAL!!!
+
+VAMOS VER ALGUMAS ALGUMAS APLICAÇÕES PARA ANÁLISE DE DADOS!!!
