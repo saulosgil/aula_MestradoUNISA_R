@@ -1,0 +1,189 @@
+---
+title: "Introdução ao R"
+author: "Saulo Gil"
+date: "2024-12-05"
+output: html_document
+---
+
+# Mestrado em Ciências - UNISA
+## Análises estatisticas 
+
+### Pacotes utilizados
+```{r}
+library(readxl) # Importar planilha de excel
+library(tidyverse) # manipulação dos dados
+```
+
+### Importar os dados
+
+```{r}
+dados <- read_excel("data/dados.xlsx")
+dados
+```
+# Vamos calcular e adicionar uma coluna com o IMC
+
+```{r}
+dados_novos <- 
+  dados |>
+  mutate(
+    IMC = round(peso / estatura ^ 2,digits =  2)
+  )
+
+dados_novos
+```
+### Vamos classificar os individuos de acordo com o IMC (obeso e eutrófico)
+
+```{r}
+dados_novos <- 
+  dados_novos |>
+  mutate(
+    IMC_classe = case_when(IMC < 30 ~ "Eutrofico",
+                           IMC >= 30 ~ "Obeso")
+  )
+
+dados_novos
+```
+
+### Será que os obesos tem idade maior que os eutróficos?
+
+Para comparar os grupos (Obesos vs. eutróficos) faremos um teste-t independente.
+
+```{r}
+resultado_testt = t.test(idade ~ IMC_classe, dados_novos)
+resultado_testt
+```
+### Lembram???
+### Todos esses paramêtros vocês conhecem!!!
+
+```{r}
+paste("O valor do t é", round(resultado_testt$statistic, 2))
+paste("O valor exato de P é:", round(resultado_testt$p.value, 4))
+paste("o intervalor de confiança 95% é:", round(resultado_testt$conf.int[c(1,2)], 2))
+```
+
+## SERÁ QUE HÁ CORRELAÇÃO ENTRE AS VARIÁVEIS?
+## Vamos ver a base de dados
+
+```{r}
+dados_novos
+```
+Vamos retirar a variável categórica e o ID do sujeito
+```{r}
+dados_corr <- 
+  dados_novos |> 
+  select(
+    -sujieito,
+    -IMC_classe
+  )
+
+dados_corr
+```
+
+```{r}
+correlacoes <- cor(dados_corr)
+correlacoes
+```
+
+```{r}
+cor.test(dados_corr$idade, dados_corr$IMC)
+```
+
+**TODAS ESSES DADOS VOCÊS TAMBÉM JÁ CONHECEM, BASTA PEGA-LOS!**
+
+## Agora vamos conhecer um pouco do PODER do R
+
+```{r}
+library(corrplot)
+
+corrplot(correlacoes,method = "number")
+```
+
+```{r}
+corrplot(correlacoes,
+         method = "number",
+         type = "lower")
+
+```
+
+```{r}
+testRes = cor.mtest(dados_corr, conf.level = 0.95)
+
+## specialized the insignificant value according to the significant level
+corrplot(correlacoes,
+         method = "number",
+         p.mat = testRes$p,
+         sig.level = 0.05,
+         type = "lower",
+         order = 'hclust',
+         addrect = 2)
+```
+
+```{r}
+corrplot(correlacoes,
+         p.mat = testRes$p, 
+         method = 'color',
+         diag = FALSE, 
+         type = 'lower',
+         sig.level = c(0.001, 0.01, 0.05),
+         pch.cex = 1.9,
+         insig = 'label_sig', 
+         pch.col = 'grey20',
+         order = 'AOE')
+```
+
+## Agora vamos fazer modelos de regressão linear (sem e com ajuste)
+
+Vamos considerar que queremover ver a idade é um preditor de IMC.
+
+**Equação da regressão - Y = β0 + β1X1 + βnXn + εX1**
+
+Para isso, iremos rodar 2 modelos:
+
+1. modelo sem ajuste = IMC ~ idade;
+
+2. modelo com ajustes = IMC ~ idade + peso + estatura;
+
+### Modelo sem ajuste
+
+```{r}
+library(sjPlot)
+
+model_sem_ajuste <- lm(IMC ~ idade,data = dados_novos)
+sjPlot::tab_model(model_sem_ajuste)
+```
+
+Mas será que as outras variáveis podem interferir nessa associação?
+
+Vamos fazer os ajustes!!!
+
+```{r}
+model_com_ajuste <- lm(IMC ~ idade + peso + estatura,data = dados_novos)
+sjPlot::tab_model(model_com_ajuste)
+```
+
+# Claro, era esperado!!! rs
+
+Vamos fazer um plot bonitinho!
+
+```{r}
+dados_novos |> 
+  select(IMC, idade) |> 
+  ggplot(mapping = aes(x = idade, y = IMC)) +
+  geom_point() + 
+  geom_smooth(method = "lm") + 
+  theme_classic()
+```
+
+
+# Esses são apenas alguns dos exemplos, mas o R é altamente versátil, em particular para trabalhar com grandes bases de dados.
+
+Vejam alguns exemplos:
+
+1. [Mapa com distribuição de leitos para homens, mulheres e indiferenciados de acordo com a base do CNES - Cadastro Nacional de Estabelecimentos de Saúde](https://saulogil.netlify.app/blog/2024-16-02-gender-equity/);
+
+2. [Volcano plor para dados de sequenciamento de mRNA](https://saulogil.netlify.app/blog/2023-10-01-volcano-plot/);
+
+3. [Outros modelos de regressão](https://saulogil.netlify.app/blog/2023-03-28-regression-models/);
+
+4. [Outros exemplos de gráficos](https://saulogil.netlify.app/blog/2023-03-28-regression-models/)
+
