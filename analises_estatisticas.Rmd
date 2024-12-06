@@ -6,7 +6,7 @@ output: html_document
 ---
 
 # Mestrado em Ciências - UNISA
-## Análises estatisticas 
+## Análises estatísticas 
 
 ### Pacotes utilizados
 ```{r}
